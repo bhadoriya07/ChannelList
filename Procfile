@@ -1,1 +1,1 @@
-web: gunicorn channelList.wsgi
+web: gunicorn app:app
