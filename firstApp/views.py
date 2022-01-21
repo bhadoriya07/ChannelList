@@ -10,6 +10,8 @@ channel_list = []
 def home(request):
     context = {'message' : ""}
     if request.method == 'POST':
+        print("channel list at first: ")
+        print(channel_list)
         rows = []
         video_id = []
         file = request.FILES["file"].readlines()
@@ -24,30 +26,34 @@ def home(request):
 
         video_id = [x.replace("\r\n","") for x in video_id]
 
+        print("Video id:")
         for video in video_id:
             print(video)
 
-        # search_url = 'https://www.googleapis.com/youtube/v3/videos'
+        search_url = 'https://www.googleapis.com/youtube/v3/videos'
 
-        # parameter = {
-        #     'key' : settings.YOUTUBE_DATA_API_KEY,
-        #     'part' : 'snippet',
-        #     'id' : ','.join(video_id)
-        # }
+        parameter = {
+            'key' : settings.YOUTUBE_DATA_API_KEY,
+            'part' : 'snippet',
+            'id' : ','.join(video_id)
+        }
 
-        # data = requests.get(search_url,params=parameter)
-        # results = data.json()['items']
+        data = requests.get(search_url,params=parameter)
+        results = data.json()['items']
 
-        # temp_list = []
+        temp_list = []
 
-        # for result in results:
-        #     data = {
-        #         'name' : result['snippet']['channelTitle'],
-        #         'url' :  f'https://www.youtube.com/channel/{ result["snippet"]["channelId"] }'
-        #     }
-        #     temp_list.append(data)
+        for result in results:
+            data = {
+                'name' : result['snippet']['channelTitle'],
+                'url' :  f'https://www.youtube.com/channel/{ result["snippet"]["channelId"] }'
+            }
+            temp_list.append(data)
         
-        # [channel_list.append(x) for x in temp_list if x not in channel_list]
+        [channel_list.append(x) for x in temp_list if x not in channel_list]
+        
+        print("channel list at home:")
+        print(channel_list)
         
         context['message'] = "Click on Download File to download the file"
 
@@ -58,6 +64,9 @@ def exportfile(request):
     response['Content-Disposition'] = 'attachement; filename="channelUrls.csv"'
 
     writer = csv.writer(response)
+
+    print("channel list at exportfile:")
+    print(channel_list)
     
     for list in channel_list:
         writer.writerow([list['url']])
