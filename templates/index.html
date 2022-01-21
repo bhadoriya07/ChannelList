@@ -24,7 +24,7 @@
                 {% csrf_token %}
                 <div class="form-group" style="margin-left: 50px;">
                   <h4 style="margin-right: 80px;">Upload a csv file :</h4>
-                  <input class="my-3" type="file" name="file" class="form-control-file " style="margin-left: 50px;">
+                  <input class="my-3" type="file" name="file" class="form-control-file " required style="margin-left: 50px;">
                 </div>
                 <small class="form-text text-muted" style="margin-top: -20px;">File Should contain video urls</small>
                 <button type="submit" class="btn btn-lg btn-success my-3" >Upload File</button>
