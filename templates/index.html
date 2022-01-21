@@ -18,20 +18,23 @@
 
   <main class="px-1">
     <div style="margin-top: 100px; margin-left: 400px;">
-        <h1 class="text-center" style="margin-top: 150px">YouTube Channel List Downloader</h1><hr>
-        <div class="container"style="margin-top: 30px;">
-          <form method="POST" enctype="multipart/form-data" class="form-group">
-                {% csrf_token %}
-                <div class="form-group" style="margin-left: 50px;">
-                  <h4 style="margin-right: 80px;">Upload a csv file :</h4>
-                  <input class="my-3" type="file" name="file" class="form-control-file " required style="margin-left: 50px;">
-                </div>
-                <small class="form-text text-muted" style="margin-top: -20px;">File Should contain video urls</small>
-                <button type="submit" class="btn btn-lg btn-success my-3" >Upload File</button>
-                <a href="{% url 'exportfile' %}" class="btn btn-lg btn-danger mx-2 my-3">Download File</a>
-                <strong><p style="color:red">{{message}}</p></strong>
-              </form >
-        </div>
+      <h1 class="text-center" style="margin-top: 150px">YouTube Channel List Downloader</h1>
+      <hr>
+      <div class="container" style="margin-top: 30px;">
+        <form method="POST" enctype="multipart/form-data" class="form-group">
+          {% csrf_token %}
+          <div class="form-group" style="margin-left: 50px;">
+            <h4 style="margin-right: 80px;">Upload a csv file :</h4>
+            <input class="my-3" type="file" name="file" class="form-control-file " required style="margin-left: 50px;">
+          </div>
+          <small class="form-text text-muted" style="margin-top: -20px;">File Should contain video urls</small>
+          <button type="submit" class="btn btn-lg btn-success my-3">Upload File</button>
+        </form>
+        <a href="{% url 'exportfile' %}" class="btn btn-lg btn-danger">Download File</a>
+        <strong>
+          <p style="color:red">{{message}}</p>
+        </strong>
+      </div>
     </div>
   </main>
 
