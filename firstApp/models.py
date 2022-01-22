@@ -1,4 +1,5 @@
+from pyexpat import model
 from django.db import models
 
-class uplodFile(models.Model):
-    file = models.FileField()
+class urls(models.Model):
+    url = models.TextField(max_length=100)

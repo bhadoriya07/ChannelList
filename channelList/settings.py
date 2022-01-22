@@ -17,7 +17,6 @@ SECRET_KEY = 'django-insecure-_wll4d)4pfu6og6dd#x8a^ejgsiumhgd@ddx9cjb(@2y^c9s0_
 DEBUG = True
 
 ALLOWED_HOSTS = ['youtube-channel-list.herokuapp.com']
-#ALLOWED_HOSTS = []
 
 # Application definition
 
