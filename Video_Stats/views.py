@@ -6,7 +6,7 @@ from django.shortcuts import render,HttpResponse
 import csv
 from django.conf import settings
 import requests
-
+from Video_Stats.models import stats
 
 temp_list = []
 def showPage(request):
@@ -84,6 +84,10 @@ def showPage(request):
             }
             temp_list.append(data)
             counter = counter+1
+        
+        for list in temp_list:
+            sta = stats(videoLink=list["videoLink"],brand=list["brand"],brand_category=list["brand_category"],cm_name=list["cmName"],cost=list["cost"],inf_name=list["inf_name"],live_date=list["videoLive_date"],channel_link=list["channel_link"],inf_category=list["category"],video_duration=list["video_duration"],views_count=list["views"],cost_perviews=list["cost_perviews"],comments=list["total_comments"],video_title=list["video_title"])
+            sta.save()
     return render(request,'stats.html')
 
 
@@ -96,8 +100,14 @@ def downloadFile(request):
 
     writer.writerow(['Video Link','Brand','Brand Category','CM Name','Cost','Influencer Name','Video Live Date','Channel Link','Inf Category','Video Duration','Views','Cost per views','Total Comments','Video Title'])
 
-    for list in temp_list:
-        writer.writerow([list["videoLink"],list["brand"],list["brand_category"],list["cmName"],list["cost"],list["inf_name"],list["videoLive_date"],list["channel_link"],list["category"],list["video_duration"],list["views"],list["cost_perviews"],list["total_comments"],list["video_title"]])
+    stats_data = stats.objects.all()
+
+    for data in stats_data:
+        writer.writerow([data.videoLink,data.brand,data.brand_category,data.cm_name,data.cost,data.inf_name,data.live_date,data.channel_link,data.inf_category,data.video_duration,data.views_count,data.cost_perviews,data.comments,data.video_title])
+
+    stats_data.delete()
+    # for list in temp_list:
+    #     writer.writerow([list["videoLink"],list["brand"],list["brand_category"],list["cmName"],list["cost"],list["inf_name"],list["videoLive_date"],list["channel_link"],list["category"],list["video_duration"],list["views"],list["cost_perviews"],list["total_comments"],list["video_title"]])
 
     temp_list.clear()
     return response
