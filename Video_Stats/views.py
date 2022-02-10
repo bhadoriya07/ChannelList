@@ -10,6 +10,8 @@ from Video_Stats.models import stats
 
 temp_list = []
 def showPage(request):
+    stats_data = stats.objects.all()
+    stats_data.delete()
     if request.method == 'POST':
         rows = []
         video_link = []
@@ -36,7 +38,11 @@ def showPage(request):
                     cost.append(row[i])
         video_id = []           
         for link in video_link[0:len(rows)-1]:
-             video_id.append((link[-11:]))
+             if '&' in link:
+                video_id.append(link.rpartition('&')[0][-11:])
+             else:
+                video_id.append((link[-11:]))
+        print(video_id)
 
         search_url = 'https://www.googleapis.com/youtube/v3/videos'
 
@@ -71,9 +77,9 @@ def showPage(request):
                 'brand_category':brand_cat[counter],
                 'cmName': cm_name[counter],
                 'cost': cost[counter],
-                'cost_perviews': int(cost[counter])/int( result['statistics']['viewCount']),
+                'cost_perviews': round(int(cost[counter])/int(result['statistics']['viewCount']),3),
                 'inf_name' : result['snippet']['channelTitle'],
-                'videoLive_date': result['snippet']['publishedAt'],
+                'videoLive_date': (result['snippet']['publishedAt']).rpartition('T')[0],
                 #'language': result['snippet']['defaultLanguage'],
                 'video_duration': (result['contentDetails']['duration']).replace("PT","").replace("M",":").replace("S","").replace("H",":"),
                 'views': result['statistics']['viewCount'],
