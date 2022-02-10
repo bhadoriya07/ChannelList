@@ -29,10 +29,6 @@ def home(request):
 
         video_id = [x.replace("\r\n","") for x in video_id]
 
-        # print("Video id:")
-        # for video in video_id:
-        #     print(video)
-
         search_url = 'https://www.googleapis.com/youtube/v3/videos'
 
         parameter = {
