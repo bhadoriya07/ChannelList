@@ -8,7 +8,6 @@ from django.conf import settings
 import requests
 from Video_Stats.models import stats
 
-temp_list = []
 def showPage(request):
     stats_data = stats.objects.all()
     stats_data.delete()
@@ -70,6 +69,7 @@ def showPage(request):
             category_name = category_data.json()['items']
             category.append(category_name[0]['snippet']['title'])
         counter = 0
+        temp_list = []
         for result in results:
             data = {
                 'videoLink': video_link[counter],
