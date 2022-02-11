@@ -114,6 +114,4 @@ def downloadFile(request):
     stats_data.delete()
     # for list in temp_list:
     #     writer.writerow([list["videoLink"],list["brand"],list["brand_category"],list["cmName"],list["cost"],list["inf_name"],list["videoLive_date"],list["channel_link"],list["category"],list["video_duration"],list["views"],list["cost_perviews"],list["total_comments"],list["video_title"]])
-
-    temp_list.clear()
     return response
