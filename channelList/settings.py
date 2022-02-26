@@ -14,7 +14,7 @@ Template_DIR = os.path.join(BASE_DIR,'templates')
 SECRET_KEY = 'django-insecure-_wll4d)4pfu6og6dd#x8a^ejgsiumhgd@ddx9cjb(@2y^c9s0_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['youtube-channel-list.herokuapp.com']
 # Application definition
